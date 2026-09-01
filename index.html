@@ -5,6 +5,10 @@
         <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
                 name="viewport" />
         <title>마인드풀 앱 - Mindful Path &amp; Quantum Journal</title>
+        <link rel="manifest" href="manifest.json" />
+        <meta name="theme-color" content="#131314" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&amp;display=swap"
                 rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
@@ -335,6 +339,24 @@
                                                 </li>
                                         </ul>
                                 </div>
+                                <!-- PWA Install & Daily Notification Launcher Banner -->
+                                <section id="pwa-install-banner" class="flex flex-col gap-unit">
+                                        <div class="relative w-full bg-gradient-to-r from-[#121a24] via-[#1c252f] to-[#114784] rounded-2xl p-5 border border-primary/30 shadow-lg flex items-center justify-between cursor-pointer hover:border-primary/60 transition-all"
+                                                id="btn-pwa-install">
+                                                <div class="flex flex-col gap-1">
+                                                        <div class="flex items-center gap-2">
+                                                                <span class="px-2 py-0.5 bg-primary/20 text-primary rounded-full text-[10px] font-bold">PWA 모바일 앱</span>
+                                                                <span class="text-xs text-vibrant-mint font-bold">매일 알림 받기</span>
+                                                        </div>
+                                                        <h3 class="font-title-md text-title-md text-on-surface">📱 홈 화면에 앱 설치 &amp; 알림 설정</h3>
+                                                        <p class="text-xs text-on-surface-variant">아침 감사 저널 &amp; 저녁 심장 명상 알림을 설정하세요.</p>
+                                                </div>
+                                                <div class="w-12 h-12 rounded-full bg-primary/20 text-primary flex items-center justify-center shrink-0">
+                                                        <span class="material-symbols-outlined text-2xl">notifications_active</span>
+                                                </div>
+                                        </div>
+                                </section>
+
                                 <!-- Quantum Gratitude Quick Launcher Banner -->
                                 <section class="flex flex-col gap-unit">
                                         <div class="relative w-full bg-gradient-to-r from-[#1c252f] via-[#121a24] to-[#24170a] rounded-2xl p-5 border border-primary/30 shadow-lg flex items-center justify-between cursor-pointer hover:border-primary/60 transition-all"

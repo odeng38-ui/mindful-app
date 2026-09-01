@@ -1,0 +1,23 @@
+{
+  "name": "마인드풀 앱 - Mindful Path & Quantum Journal",
+  "short_name": "마인드풀",
+  "description": "선제적 감사 저널, 3단계 심장 호흡 명상 및 우주적 주파수 정렬 마인드풀니스 스마트 앱",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#131314",
+  "theme_color": "#131314",
+  "orientation": "portrait",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "https://lh3.googleusercontent.com/aida-public/AB6AXuCujMNkK3hxko9uJgr73EZd0umABpztGMhCQzklrnfEG5OlTTzXPzVmEIF_dF0qWHiDNOJMgRDNjuxSUEhkc0BRC-78y1sC7fvfRCi5DF5JDXnDCfTuvsNoXIYIXWbKIvuQsdGLWOHz7nxqpGRtnZlg60anCDLkj6edyyGVQrejZ-pa0zPL4KEeqhhMS4BiLmGz-nutM9nCVcaL2u-bdVTIk5ILumWlJ9zZ8EUwa7W0RcFZipCDBSrW",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://lh3.googleusercontent.com/aida-public/AB6AXuCujMNkK3hxko9uJgr73EZd0umABpztGMhCQzklrnfEG5OlTTzXPzVmEIF_dF0qWHiDNOJMgRDNjuxSUEhkc0BRC-78y1sC7fvfRCi5DF5JDXnDCfTuvsNoXIYIXWbKIvuQsdGLWOHz7nxqpGRtnZlg60anCDLkj6edyyGVQrejZ-pa0zPL4KEeqhhMS4BiLmGz-nutM9nCVcaL2u-bdVTIk5ILumWlJ9zZ8EUwa7W0RcFZipCDBSrW",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

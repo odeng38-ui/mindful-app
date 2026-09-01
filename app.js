@@ -1,10 +1,11 @@
 /**
  * Mindful Path - Shared Application Logic & State Management
- * Includes Quantum Gratitude Journal & Triple Heart Meditation modules
+ * Includes Quantum Gratitude Journal, Triple Heart Meditation & Notification/Alarm System
  */
 
 const STORAGE_KEY = 'mindful_path_app_data';
 const QUANTUM_STORAGE_KEY = 'mindful_path_quantum_data';
+const NOTIFICATION_STORAGE_KEY = 'mindful_path_notification_data';
 
 // Helper to get formatted date string (YYYY-MM-DD)
 function getFormattedDate(date = new Date()) {
@@ -208,6 +209,37 @@ const QuantumStore = {
 };
 
 // ----------------------------------------------------
+// NOTIFICATION & ALARM STORE
+// ----------------------------------------------------
+const NotificationStore = {
+  getSettings() {
+    try {
+      const raw = localStorage.getItem(NOTIFICATION_STORAGE_KEY);
+      if (!raw) {
+        return {
+          enabled: true,
+          morningTime: '08:00',
+          eveningTime: '21:00',
+          lastMorningDate: '',
+          lastEveningDate: ''
+        };
+      }
+      return JSON.parse(raw);
+    } catch (e) {
+      return { enabled: true, morningTime: '08:00', eveningTime: '21:00', lastMorningDate: '', lastEveningDate: '' };
+    }
+  },
+
+  saveSettings(settings) {
+    try {
+      localStorage.setItem(NOTIFICATION_STORAGE_KEY, JSON.stringify(settings));
+    } catch (e) {
+      console.error('Failed to save notification settings', e);
+    }
+  }
+};
+
+// ----------------------------------------------------
 // AI COSMIC REFRAMING ENGINE (System Prompt Simulation)
 // ----------------------------------------------------
 function generateCosmicReframing(obstacleText) {
@@ -217,7 +249,6 @@ function generateCosmicReframing(obstacleText) {
 
   const cleanInput = obstacleText.trim();
   
-  // Cosmic Reframing Patterns based on prompt guidelines
   const reframingTemplates = [
     `✨ [신성한 궤도 수정] "${cleanInput}"에 대한 불안은 낡은 파동이 깨어지는 거룩한 정화 과정입니다. 우주는 지금 당신에게 더 거대한 풍요와 축복의 그릇을 마련하기 위해 이전의 한계 지어진 주파수를 해체하고 있습니다. 모든 자원이 이미 완벽한 시기에 예비되어 있음에 벅차게 감사합니다.`,
     `✨ [양자장 주파수 재정렬] 당장의 정체와 장애물은 나를 불행하게 하려는 고난이 아닙니다. 더 고차원적인 기쁨의 통로로 인도하기 위한 우주의 자비로운 궤도 수정(Divine Restructuring)입니다. 결핍에 영혼을 넘기지 않고 이미 완성된 풍요의 주파수에 내 삶을 정렬함에 사전에 깊이 감사합니다.`,
@@ -278,10 +309,224 @@ function showToast(message, icon = 'info') {
   }, 2600);
 }
 
+// ----------------------------------------------------
+// PWA & ALARM NOTIFICATION ENGINE
+// ----------------------------------------------------
+let deferredInstallPrompt = null;
+
+function initPWAAndNotifications() {
+  // Register Service Worker
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js').then((reg) => {
+      console.log('Service Worker registered', reg);
+    }).catch((err) => {
+      console.log('Service Worker registration failed', err);
+    });
+  }
+
+  // PWA Install Prompt Listener
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredInstallPrompt = e;
+    const installBanner = document.getElementById('pwa-install-banner');
+    if (installBanner) installBanner.classList.remove('hidden');
+  });
+
+  // Start periodic alarm checker
+  startAlarmChecker();
+  // Setup Notification Settings UI & Modal
+  setupNotificationUI();
+}
+
+function sendWebNotification(title, body, url = '/index.html') {
+  playSingingBowlSound(528, 2.5);
+  
+  if ('Notification' in window && Notification.permission === 'granted') {
+    try {
+      if (navigator.serviceWorker && navigator.serviceWorker.controller) {
+        navigator.serviceWorker.ready.then((reg) => {
+          reg.showNotification(title, {
+            body: body,
+            icon: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCujMNkK3hxko9uJgr73EZd0umABpztGMhCQzklrnfEG5OlTTzXPzVmEIF_dF0qWHiDNOJMgRDNjuxSUEhkc0BRC-78y1sC7fvfRCi5DF5JDXnDCfTuvsNoXIYIXWbKIvuQsdGLWOHz7nxqpGRtnZlg60anCDLkj6edyyGVQrejZ-pa0zPL4KEeqhhMS4BiLmGz-nutM9nCVcaL2u-bdVTIk5ILumWlJ9zZ8EUwa7W0RcFZipCDBSrW',
+            data: { url: url },
+            vibrate: [200, 100, 200]
+          });
+        });
+      } else {
+        new Notification(title, { body: body, icon: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCujMNkK3hxko9uJgr73EZd0umABpztGMhCQzklrnfEG5OlTTzXPzVmEIF_dF0qWHiDNOJMgRDNjuxSUEhkc0BRC-78y1sC7fvfRCi5DF5JDXnDCfTuvsNoXIYIXWbKIvuQsdGLWOHz7nxqpGRtnZlg60anCDLkj6edyyGVQrejZ-pa0zPL4KEeqhhMS4BiLmGz-nutM9nCVcaL2u-bdVTIk5ILumWlJ9zZ8EUwa7W0RcFZipCDBSrW' });
+      }
+    } catch (e) {
+      console.log('Notification error', e);
+    }
+  }
+
+  showToast(`🔔 ${title}: ${body}`, 'notifications_active');
+}
+
+function startAlarmChecker() {
+  setInterval(() => {
+    const settings = NotificationStore.getSettings();
+    if (!settings.enabled) return;
+
+    const now = new Date();
+    const currentTimeStr = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+    const todayStr = getFormattedDate(now);
+
+    // Morning Preemptive Gratitude Reminder
+    if (currentTimeStr === settings.morningTime && settings.lastMorningDate !== todayStr) {
+      settings.lastMorningDate = todayStr;
+      NotificationStore.saveSettings(settings);
+      sendWebNotification('🌅 아침 선제 감사 저널 시간', '오늘 이루어질 눈부신 성공에 안도하며 선제 감사를 작성해보세요.', 'quantum_journal_dark.html');
+    }
+
+    // Evening Heart Meditation Reminder
+    if (currentTimeStr === settings.eveningTime && settings.lastEveningDate !== todayStr) {
+      settings.lastEveningDate = todayStr;
+      NotificationStore.saveSettings(settings);
+      sendWebNotification('🧘 저녁 심장 호흡 명상 시간', '하루 동안의 초조함을 내려놓고 10분 심장 호흡으로 주파수를 조율하세요.', 'heart_meditation_dark.html');
+    }
+  }, 25000);
+}
+
+function setupNotificationUI() {
+  // Inject Notification Bell into Header if missing
+  const headerDiv = document.querySelector('header > div');
+  if (headerDiv && !document.getElementById('btn-header-notification')) {
+    const bellBtn = document.createElement('button');
+    bellBtn.id = 'btn-header-notification';
+    bellBtn.type = 'button';
+    bellBtn.className = 'w-9 h-9 rounded-full bg-surface-container/80 border border-primary/20 flex items-center justify-center text-primary hover:bg-primary/20 transition-all mr-2';
+    bellBtn.innerHTML = '<span class="material-symbols-outlined text-xl">notifications</span>';
+    
+    // Insert before profile image
+    const profileImg = headerDiv.querySelector('img[alt="Profile"]');
+    if (profileImg) headerDiv.insertBefore(bellBtn, profileImg);
+    else headerDiv.appendChild(bellBtn);
+
+    bellBtn.addEventListener('click', openNotificationModal);
+  }
+
+  // Inject Modal into Document Body
+  if (!document.getElementById('notification-modal')) {
+    const modalDiv = document.createElement('div');
+    modalDiv.id = 'notification-modal';
+    modalDiv.className = 'fixed inset-0 z-50 bg-black/70 backdrop-blur-md flex items-center justify-center p-4 hidden';
+    modalDiv.innerHTML = `
+      <div class="bg-surface-container-lowest rounded-2xl p-6 w-full max-w-md border border-primary/40 shadow-2xl flex flex-col gap-4 relative">
+        <button id="btn-close-notif-modal" class="absolute top-4 right-4 text-on-surface-variant hover:text-on-surface">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+
+        <div class="flex items-center gap-3 border-b border-surface-variant pb-3">
+          <div class="w-10 h-10 rounded-full bg-primary/20 text-primary flex items-center justify-center">
+            <span class="material-symbols-outlined text-2xl">notifications_active</span>
+          </div>
+          <div>
+            <h3 class="font-title-md text-title-md text-on-surface">🔔 알림 &amp; 리마인더 알람 설정</h3>
+            <p class="text-xs text-on-surface-variant">잊지 않고 매일 감사와 명상을 실천할 수 있도록 안내해드립니다.</p>
+          </div>
+        </div>
+
+        <div class="space-y-4 text-sm">
+          <!-- Toggle Master Notification -->
+          <div class="flex justify-between items-center bg-surface-container p-3.5 rounded-xl border border-surface-variant">
+            <div>
+              <span class="font-bold text-on-surface block">데일리 리마인더 알림 받기</span>
+              <span class="text-xs text-on-surface-variant">설정된 시간에 매일 알림 발송</span>
+            </div>
+            <label class="relative inline-flex items-center cursor-pointer">
+              <input id="notif-toggle" type="checkbox" class="sr-only peer" checked>
+              <div class="w-11 h-6 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+            </label>
+          </div>
+
+          <!-- Morning Time Input -->
+          <div class="bg-surface-container p-3.5 rounded-xl border border-surface-variant space-y-2">
+            <div class="flex justify-between items-center">
+              <span class="font-bold text-primary flex items-center gap-1">🌅 아침 선제 감사 알림</span>
+              <input id="notif-morning-time" type="time" class="bg-surface-container-low border border-surface-variant rounded-lg px-2 py-1 text-on-surface font-bold text-sm focus:outline-none focus:border-primary">
+            </div>
+            <p class="text-xs text-on-surface-variant">하루를 시작하며 이루어질 성공에 선제 감사를 작성해보세요.</p>
+          </div>
+
+          <!-- Evening Time Input -->
+          <div class="bg-surface-container p-3.5 rounded-xl border border-surface-variant space-y-2">
+            <div class="flex justify-between items-center">
+              <span class="font-bold text-vibrant-mint flex items-center gap-1">🧘 저녁 심장 명상 알림</span>
+              <input id="notif-evening-time" type="time" class="bg-surface-container-low border border-surface-variant rounded-lg px-2 py-1 text-on-surface font-bold text-sm focus:outline-none focus:border-vibrant-mint">
+            </div>
+            <p class="text-xs text-on-surface-variant">하루를 마무리하며 10분 심장 호흡으로 주파수를 조율하세요.</p>
+          </div>
+        </div>
+
+        <div class="flex flex-col gap-2 pt-2">
+          <button id="btn-request-permission" type="button" class="w-full py-3 bg-surface-container-high text-primary border border-primary/30 font-bold rounded-xl text-xs flex items-center justify-center gap-2 hover:bg-primary/20 transition-all">
+            <span class="material-symbols-outlined text-sm">security</span> 브라우저 알림 권한 허용 및 알림 테스트
+          </button>
+
+          <button id="btn-save-notif-settings" type="button" class="w-full py-3.5 bg-primary text-on-primary font-bold rounded-xl text-sm flex items-center justify-center gap-1 hover:bg-primary/90 shadow-md">
+            <span class="material-symbols-outlined text-sm">check</span> 알림 설정 저장하기
+          </button>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(modalDiv);
+
+    document.getElementById('btn-close-notif-modal').addEventListener('click', () => {
+      modalDiv.classList.add('hidden');
+    });
+
+    document.getElementById('btn-request-permission').addEventListener('click', () => {
+      if ('Notification' in window) {
+        Notification.requestPermission().then((perm) => {
+          if (perm === 'granted') {
+            sendWebNotification('🎉 알림 권한이 허용되었습니다!', '이제 설정하신 시간에 아침 감사와 저녁 명상 알림을 받아보실 수 있습니다.');
+          } else {
+            showToast('알림 권한이 거부되었습니다. 브라우저 설정에서 알림을 허용해주세요.', 'warning');
+          }
+        });
+      } else {
+        showToast('이 브라우저는 알림 기능을 지원하지 않습니다.', 'warning');
+      }
+    });
+
+    document.getElementById('btn-save-notif-settings').addEventListener('click', () => {
+      const enabled = document.getElementById('notif-toggle').checked;
+      const morningTime = document.getElementById('notif-morning-time').value || '08:00';
+      const eveningTime = document.getElementById('notif-evening-time').value || '21:00';
+
+      NotificationStore.saveSettings({
+        enabled,
+        morningTime,
+        eveningTime,
+        lastMorningDate: '',
+        lastEveningDate: ''
+      });
+
+      modalDiv.classList.add('hidden');
+      playSingingBowlSound(528, 2);
+      showToast('🔔 알림 설정이 저장되었습니다!', 'notifications_active');
+    });
+  }
+}
+
+function openNotificationModal() {
+  const modal = document.getElementById('notification-modal');
+  if (!modal) return;
+
+  const settings = NotificationStore.getSettings();
+  document.getElementById('notif-toggle').checked = settings.enabled;
+  document.getElementById('notif-morning-time').value = settings.morningTime || '08:00';
+  document.getElementById('notif-evening-time').value = settings.eveningTime || '21:00';
+
+  modal.classList.remove('hidden');
+}
+
 // Global initialization logic on page load
 document.addEventListener('DOMContentLoaded', () => {
   setupNavigationLinks();
   initCurrentPage();
+  initPWAAndNotifications();
 
   window.addEventListener('mindful_data_changed', () => {
     initCurrentPage();
@@ -423,6 +668,24 @@ function initHomePage() {
     quoteCard.onclick = () => {
       playSingingBowlSound(528, 2.5);
       showToast('명언 문구가 우주 양자장에 각인되었습니다.', 'auto_awesome');
+    };
+  }
+
+  // PWA Install Banner Click
+  const installBannerBtn = document.getElementById('btn-pwa-install');
+  if (installBannerBtn) {
+    installBannerBtn.onclick = () => {
+      if (deferredInstallPrompt) {
+        deferredInstallPrompt.prompt();
+        deferredInstallPrompt.userChoice.then((choiceResult) => {
+          if (choiceResult.outcome === 'accepted') {
+            showToast('📱 앱이 홈 화면에 추가되었습니다!', 'system_update');
+          }
+          deferredInstallPrompt = null;
+        });
+      } else {
+        openNotificationModal();
+      }
     };
   }
 }
