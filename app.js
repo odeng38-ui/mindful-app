@@ -292,10 +292,10 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function setupNavigationLinks() {
-  const path = window.location.pathname.split('/').pop() || 'home_dashboard_dark.html';
+  const path = window.location.pathname.split('/').pop() || 'index.html';
   
   const navMap = {
-    'home': 'home_dashboard_dark.html',
+    'home': 'index.html',
     'quantum': 'quantum_journal_dark.html',
     'meditation': 'heart_meditation_dark.html',
     'daily-check': 'daily_check_tracker_dark.html',
@@ -308,7 +308,7 @@ function setupNavigationLinks() {
     const key = link.getAttribute('data-path');
     if (navMap[key]) {
       link.setAttribute('href', navMap[key]);
-      if (path.includes(navMap[key]) || (path === '' && key === 'home')) {
+      if (path.includes(navMap[key]) || path.includes('home_dashboard_dark') || (path === '' && key === 'home')) {
         link.classList.add('text-primary', 'font-bold');
         link.classList.remove('text-on-surface-variant');
         link.setAttribute('aria-current', 'page');
@@ -325,15 +325,15 @@ function setupNavigationLinks() {
   logoElements.forEach(el => {
     el.style.cursor = 'pointer';
     el.onclick = () => {
-      window.location.href = 'home_dashboard_dark.html';
+      window.location.href = 'index.html';
     };
   });
 }
 
 function initCurrentPage() {
-  const path = window.location.pathname.split('/').pop() || 'home_dashboard_dark.html';
+  const path = window.location.pathname.split('/').pop() || 'index.html';
 
-  if (path.includes('home_dashboard_dark') || path === '' || path === '/') {
+  if (path.includes('home_dashboard_dark') || path.includes('index') || path === '' || path === '/') {
     initHomePage();
   } else if (path.includes('daily_check_tracker_dark')) {
     initDailyCheckPage();
