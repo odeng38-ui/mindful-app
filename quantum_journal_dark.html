@@ -1,0 +1,480 @@
+<html lang="ko">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/>
+  <title>양자 감사 저널 - Mindful Path</title>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-secondary-container": "#8cb6fb",
+            "surface-tint": "#bfc7d5",
+            "secondary-fixed-dim": "#a8c8ff",
+            "surface-card": "#1c252f",
+            "primary-fixed-dim": "#bfc7d5",
+            "error-container": "#93000a",
+            "primary-container": "#121a24",
+            "on-primary-container": "#7b838f",
+            "secondary-fixed": "#d5e3ff",
+            "vibrant-mint": "#a8f0cc",
+            "surface-container-high": "#2a2a2b",
+            "surface-container": "#1f1f20",
+            "on-primary": "#29313c",
+            "primary-fixed": "#dbe3f1",
+            "on-surface": "#e4e2e2",
+            "tertiary": "#dbc2ad",
+            "surface-container-low": "#1b1b1c",
+            "on-secondary": "#003061",
+            "on-tertiary-container": "#947f6c",
+            "outline": "#8f9196",
+            "primary": "#bfc7d5",
+            "vibrant-lavender": "#d1b3ff",
+            "error": "#ffb4ab",
+            "on-secondary-fixed": "#001b3c",
+            "tertiary-fixed": "#f8dec8",
+            "vibrant-coral": "#ffadaa",
+            "outline-variant": "#44474b",
+            "on-primary-fixed": "#141c26",
+            "on-background": "#e4e2e2",
+            "on-error": "#690005",
+            "secondary-container": "#114784",
+            "surface-bright": "#39393a",
+            "surface-container-highest": "#353535",
+            "on-tertiary": "#3d2d1f",
+            "secondary": "#a8c8ff",
+            "inverse-on-surface": "#303031",
+            "on-tertiary-fixed-variant": "#554334",
+            "surface-dim": "#131314",
+            "surface-float": "#252f3a",
+            "tertiary-container": "#24170a",
+            "on-primary-fixed-variant": "#3f4753",
+            "inverse-primary": "#575f6b",
+            "on-surface-variant": "#c5c6cc",
+            "background": "#131314",
+            "on-tertiary-fixed": "#26190c",
+            "surface-variant": "#353535",
+            "on-secondary-fixed-variant": "#114784",
+            "surface": "#131314",
+            "tertiary-fixed-dim": "#dbc2ad",
+            "surface-container-lowest": "#0e0e0f",
+            "on-error-container": "#ffdad6",
+            "inverse-surface": "#e4e2e2"
+          },
+          "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+          "spacing": { "section-gap": "40px", "unit": "8px", "gutter": "16px", "container-margin": "24px", "card-padding": "20px" }
+        }
+      }
+    }
+  </script>
+  <style>
+    @layer base { body { overscroll-behavior: none; } .pb-safe { padding-bottom: env(safe-area-inset-bottom, 0px); } .pt-safe { padding-top: env(safe-area-inset-top, 0px); } }
+    .backdrop-blur-soft { backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
+  </style>
+</head>
+<body class="bg-background font-body-md text-on-background dark min-h-screen">
+  <!-- Header -->
+  <header class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-soft shadow-[0_1px_8px_rgba(0,0,0,0.4)] pt-safe">
+    <div class="h-16 px-container-margin flex items-center justify-between">
+      <div class="flex items-center gap-unit cursor-pointer" onclick="window.location.href='home_dashboard_dark.html'">
+        <img alt="Mindful Path Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCujMNkK3hxko9uJgr73EZd0umABpztGMhCQzklrnfEG5OlTTzXPzVmEIF_dF0qWHiDNOJMgRDNjuxSUEhkc0BRC-78y1sC7fvfRCi5DF5JDXnDCfTuvsNoXIYIXWbKIvuQsdGLWOHz7nxqpGRtnZlg60anCDLkj6edyyGVQrejZ-pa0zPL4KEeqhhMS4BiLmGz-nutM9nCVcaL2u-bdVTIk5ILumWlJ9zZ8EUwa7W0RcFZipCDBSrW"/>
+        <span class="font-title-md text-title-md text-primary">양자 감사 저널</span>
+      </div>
+      <img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDBaLNpNTNgBtMC7C7YMMUmXonp3wVi5BXKi9ZTWIF8qZ7trb00EXYcyiDlPln6hTzauEz9Jlx9KrsDdDuAMIZ1m4CFWyvx0423OKyoE8ARJDUfGmXGrAuWsbAMCcquBJploey3CDS8vkU5Smfxp8kW2ugQW4-sgBMIctWIMVKUAuBKe6rsaL3One8i8Gs1rY1-X8R5L7BKJU5iT_LwrZt-zfKe2z3ZaFRVNt2km750M7Ltsriw8R9X"/>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="relative w-full min-h-screen pt-20 pb-36 bg-surface">
+    <div class="flex flex-col w-full px-container-margin gap-6">
+
+      <!-- Top Cosmic Intro Banner -->
+      <div class="relative w-full bg-gradient-to-r from-[#1c252f] via-[#121a24] to-[#24170a] rounded-2xl p-6 border border-primary/30 shadow-xl overflow-hidden">
+        <div class="absolute -right-10 -bottom-10 opacity-20 pointer-events-none">
+          <span class="material-symbols-outlined text-[150px] text-vibrant-lavender">auto_awesome</span>
+        </div>
+        <div class="relative z-10 flex flex-col gap-2">
+          <div class="flex items-center gap-2">
+            <span class="px-3 py-1 bg-vibrant-lavender/20 text-vibrant-lavender rounded-full text-xs font-bold">테슬라 3·6·9 진동 원리</span>
+            <span class="px-3 py-1 bg-vibrant-mint/20 text-vibrant-mint rounded-full text-xs font-bold">양자 관측자 효과</span>
+          </div>
+          <h1 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface mt-1">선제적 감사 &amp; 양자장 조율</h1>
+          <p class="font-body-md text-body-md text-on-surface-variant">소망이 현실에 나타나기 전, 이미 이루어졌음에 안도하고 우주 주파수에 내 의식을 완벽히 정렬합니다.</p>
+        </div>
+      </div>
+
+      <!-- Step 1: FUTURE (미래 선제 감사) -->
+      <section class="bg-surface-container-lowest rounded-2xl p-card-padding border border-surface-variant shadow-md flex flex-col gap-4">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full bg-primary/20 text-primary flex items-center justify-center font-bold text-lg">
+            1
+          </div>
+          <div>
+            <span class="text-xs text-primary font-bold tracking-wider uppercase">Step 1: FUTURE</span>
+            <h2 class="font-title-md text-title-md text-on-surface">미래 선제 감사 (Preemptive Gratitude)</h2>
+          </div>
+        </div>
+        <p class="text-sm text-on-surface-variant">소망이 이미 완벽히 성취된 시점(현재진행형 또는 과거완료형)으로 3가지 항목을 작성하세요.</p>
+        
+        <!-- Preset Templates Buttons -->
+        <div class="flex flex-wrap gap-2">
+          <button type="button" class="preset-btn text-xs px-3 py-1.5 rounded-full bg-surface-container text-on-surface-variant hover:bg-primary/20 hover:text-primary transition-all">
+            ✨ 사업 아이디어 성공 감사
+          </button>
+          <button type="button" class="preset-btn text-xs px-3 py-1.5 rounded-full bg-surface-container text-on-surface-variant hover:bg-primary/20 hover:text-primary transition-all">
+            ✨ 내면의 완벽한 평온 달성
+          </button>
+          <button type="button" class="preset-btn text-xs px-3 py-1.5 rounded-full bg-surface-container text-on-surface-variant hover:bg-primary/20 hover:text-primary transition-all">
+            ✨ 풍요로운 영적 인연 감사
+          </button>
+        </div>
+
+        <div class="space-y-3">
+          <div class="relative">
+            <span class="absolute left-3 top-3 text-xs text-primary font-bold">소망 1</span>
+            <textarea id="future-1" rows="2" class="w-full pt-7 pb-2 px-3 bg-surface-container-low border border-surface-variant rounded-xl text-on-surface text-sm focus:outline-none focus:border-primary transition-colors" placeholder="예: 꿈꾸던 사업 아이디어가 우주의 조력 속에서 월 수익 1천만 원을 돌파하며 자립했음에 벅차게 감사합니다."></textarea>
+          </div>
+          <div class="relative">
+            <span class="absolute left-3 top-3 text-xs text-primary font-bold">소망 2</span>
+            <textarea id="future-2" rows="2" class="w-full pt-7 pb-2 px-3 bg-surface-container-low border border-surface-variant rounded-xl text-on-surface text-sm focus:outline-none focus:border-primary transition-colors" placeholder="예: 내면의 불안이 소멸하고 명확한 비전으로 매일 아침 감동으로 눈뜨게 됨에 깊이 감사합니다."></textarea>
+          </div>
+          <div class="relative">
+            <span class="absolute left-3 top-3 text-xs text-primary font-bold">소망 3</span>
+            <textarea id="future-3" rows="2" class="w-full pt-7 pb-2 px-3 bg-surface-container-low border border-surface-variant rounded-xl text-on-surface-variant text-sm focus:outline-none focus:border-primary transition-colors" placeholder="예: 사랑하는 이들과 깊은 교감을 나누며 삶의 풍요를 만끽함에 기쁘게 감사합니다."></textarea>
+          </div>
+        </div>
+      </section>
+
+      <!-- Step 2: PRESENT (현재 정렬 감사) -->
+      <section class="bg-surface-container-lowest rounded-2xl p-card-padding border border-surface-variant shadow-md flex flex-col gap-4">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full bg-vibrant-mint/20 text-vibrant-mint flex items-center justify-center font-bold text-lg">
+            2
+          </div>
+          <div>
+            <span class="text-xs text-vibrant-mint font-bold tracking-wider uppercase">Step 2: PRESENT</span>
+            <h2 class="font-title-md text-title-md text-on-surface">현재 정렬 감사 (Daily Blessings)</h2>
+          </div>
+        </div>
+        <p class="text-sm text-on-surface-variant">당연하게 여겼던 일상의 충만함과 축복(공기, 안전한 보금자리, 건강)을 3가지 인식합니다.</p>
+
+        <div class="space-y-3">
+          <input id="present-1" type="text" class="w-full py-3 px-3 bg-surface-container-low border border-surface-variant rounded-xl text-on-surface text-sm focus:outline-none focus:border-vibrant-mint transition-colors" placeholder="축복 1: 자유롭게 숨 쉴 수 있는 깨끗한 공기와 건강한 신체에 감사합니다." />
+          <input id="present-2" type="text" class="w-full py-3 px-3 bg-surface-container-low border border-surface-variant rounded-xl text-on-surface text-sm focus:outline-none focus:border-vibrant-mint transition-colors" placeholder="축복 2: 안전하고 따뜻한 보금자리에서 휴식을 취할 수 있음에 감사합니다." />
+          <input id="present-3" type="text" class="w-full py-3 px-3 bg-surface-container-low border border-surface-variant rounded-xl text-on-surface text-sm focus:outline-none focus:border-vibrant-mint transition-colors" placeholder="축복 3: 나를 지지해 주는 온기 어린 사람들과의 연결에 감사합니다." />
+        </div>
+      </section>
+
+      <!-- Step 3: REFRAMING (신성한 조정에의 복종 & AI 변환) -->
+      <section class="bg-surface-container-lowest rounded-2xl p-card-padding border border-surface-variant shadow-md flex flex-col gap-4">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full bg-vibrant-lavender/20 text-vibrant-lavender flex items-center justify-center font-bold text-lg">
+            3
+          </div>
+          <div>
+            <span class="text-xs text-vibrant-lavender font-bold tracking-wider uppercase">Step 3: REFRAMING</span>
+            <h2 class="font-title-md text-title-md text-on-surface">신성한 궤도 수정 (Divine Restructuring)</h2>
+          </div>
+        </div>
+        <p class="text-sm text-on-surface-variant">현재의 시련/장벽을 낡은 파동을 깨는 우주의 보호 조치이자 감사 문장으로 재해석합니다.</p>
+
+        <div class="space-y-3">
+          <textarea id="reframing-obstacle" rows="2" class="w-full p-3 bg-surface-container-low border border-surface-variant rounded-xl text-on-surface text-sm focus:outline-none focus:border-vibrant-lavender transition-colors" placeholder="겪고 있는 시련/불안 요소를 적어보세요 (예: 최근 일이 정체되어 불안함)."></textarea>
+          
+          <button id="btn-ai-reframe" type="button" class="w-full py-3 bg-gradient-to-r from-vibrant-lavender/30 to-primary/30 text-vibrant-lavender border border-vibrant-lavender/40 rounded-xl font-bold text-sm flex items-center justify-center gap-2 hover:bg-vibrant-lavender/40 active:scale-98 transition-all shadow-sm">
+            <span class="material-symbols-outlined text-lg">auto_awesome</span>
+            ✨ 우주적 리프레이밍 감사문 자동 생성 (AI Engine)
+          </button>
+
+          <!-- Generated Cosmic Reframing Output -->
+          <div id="reframing-result-box" class="hidden p-4 bg-vibrant-lavender/10 border border-vibrant-lavender/30 rounded-xl text-on-surface text-sm leading-relaxed space-y-2">
+            <span class="text-xs font-bold text-vibrant-lavender uppercase tracking-wider block">🌌 우주적 궤도 수정 감사문</span>
+            <p id="reframing-result-text" class="italic text-on-surface"></p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Sacred Daily Declarations -->
+      <section class="bg-tertiary-container/80 text-on-tertiary-container rounded-2xl p-card-padding border border-tertiary/40 flex flex-col gap-4">
+        <div class="flex items-center justify-between">
+          <h3 class="font-title-md text-title-md text-on-surface flex items-center gap-2">
+            <span class="material-symbols-outlined text-tertiary-fixed">verified</span>
+            우주적 정렬을 위한 매일의 위대한 선언문
+          </h3>
+          <span class="text-xs text-tertiary-fixed font-bold">3대 법칙</span>
+        </div>
+
+        <div class="space-y-3 text-sm">
+          <div class="p-3 bg-surface-container-lowest/60 rounded-xl border border-tertiary/20">
+            <p class="font-bold text-tertiary-fixed mb-1">1. 공급의 완전성 선언</p>
+            <p class="opacity-90 leading-relaxed">"상황이 설령 정체되어 보일지라도, 우주의 보이지 않는 일손은 나를 풍요와 완벽으로 채우기 위해 눈부신 청사진을 직조하고 있음을 온 영혼으로 신뢰합니다."</p>
+          </div>
+          <div class="p-3 bg-surface-container-lowest/60 rounded-xl border border-tertiary/20">
+            <p class="font-bold text-tertiary-fixed mb-1">2. 시련의 축복화 선언</p>
+            <p class="opacity-90 leading-relaxed">"시련의 벼랑 끝에 몰렸을지라도, 더 고차원적인 기쁨의 통로를 개척하기 위해 낡은 파동을 깨뜨리는 신성한 궤도 수정임을 깨닫고 먼저 깊은 감사를 발산합니다."</p>
+          </div>
+          <div class="p-3 bg-surface-container-lowest/60 rounded-xl border border-tertiary/20">
+            <p class="font-bold text-tertiary-fixed mb-1">3. 주파수의 완전정렬 선언</p>
+            <p class="opacity-90 leading-relaxed">"나는 더 이상 결핍에 영혼을 넘기지 않으며, 이미 만물이 완전하게 풍요로운 감사의 주파수에 내 삶을 기쁘게 투사하여 우주 본연의 설계도와 공명하겠습니다."</p>
+          </div>
+        </div>
+
+        <button id="btn-confirm-declarations" type="button" class="w-full py-3 bg-tertiary text-on-tertiary font-bold rounded-xl text-sm flex items-center justify-center gap-2 hover:bg-tertiary/90 active:scale-98 transition-all">
+          <span class="material-symbols-outlined text-lg">check_circle</span>
+          선언문 낭독 및 주파수 확약 완료
+        </button>
+      </section>
+
+      <!-- Signature & Receipt Trigger Button -->
+      <section class="flex flex-col gap-3">
+        <button id="btn-open-signature-modal" type="button" class="w-full py-4 bg-primary text-on-primary rounded-full font-title-md text-title-md shadow-[0_4px_20px_rgba(0,0,0,0.4)] hover:bg-primary/90 active:scale-[0.98] transition-all flex items-center justify-center gap-2">
+          <span class="material-symbols-outlined text-xl">draw</span>
+          ✍️ 자필 서명 &amp; 양자장 동조 보증서(영수증) 발급
+        </button>
+        <button id="btn-go-meditation" type="button" class="w-full py-3 bg-surface-container text-on-surface border border-primary/30 rounded-full font-title-md text-title-md hover:bg-surface-container-high active:scale-[0.98] transition-all flex items-center justify-center gap-2">
+          <span class="material-symbols-outlined text-xl text-vibrant-mint">self_improvement</span>
+          🧘 10분 심장 호흡 명상 세션 시작하기
+        </button>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Signature Pad & Receipt Modal -->
+  <div id="signature-modal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-md flex items-center justify-center p-4 hidden">
+    <div class="bg-surface-container-lowest rounded-2xl p-6 w-full max-w-md border border-primary/40 shadow-2xl flex flex-col gap-4 relative">
+      <button id="btn-close-modal" class="absolute top-4 right-4 text-on-surface-variant hover:text-on-surface">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+      
+      <div class="text-center">
+        <span class="text-xs text-primary font-bold uppercase tracking-wider">Digital Quantum Signature</span>
+        <h3 class="font-title-md text-title-md text-on-surface mt-1">영적 주파수 인도 자필 서명</h3>
+        <p class="text-xs text-on-surface-variant mt-1">"우주의 설계도를 절대적으로 신뢰하며, 약속된 모든 풍요를 받아들입니다."</p>
+      </div>
+
+      <!-- Canvas Signature Pad -->
+      <div class="relative w-full h-44 bg-surface-container-low rounded-xl border border-surface-variant overflow-hidden touch-none">
+        <canvas id="signature-canvas" class="w-full h-full cursor-crosshair"></canvas>
+        <span class="absolute bottom-2 right-3 text-[10px] text-outline-variant pointer-events-none">마우스/손가락으로 서명</span>
+      </div>
+
+      <div class="flex gap-2">
+        <button id="btn-clear-canvas" type="button" class="px-4 py-2 bg-surface-container text-on-surface-variant rounded-xl text-xs font-bold hover:bg-surface-container-high">
+          지우기
+        </button>
+        <button id="btn-issue-receipt" type="button" class="flex-1 py-3 bg-primary text-on-primary font-bold rounded-xl text-sm flex items-center justify-center gap-1 hover:bg-primary/90 shadow-md">
+          <span class="material-symbols-outlined text-sm">workspace_premium</span>
+          양자장 동조 보증서 발급하기
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Navigation -->
+  <nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface/80 backdrop-blur-soft shadow-[0_-1px_8px_rgba(0,0,0,0.4)]">
+    <div class="flex justify-between items-center h-20 px-container-margin text-xs">
+      <a class="flex flex-col items-center justify-center gap-1 min-w-[44px] text-on-surface-variant hover:text-primary transition-colors" data-path="home" href="home_dashboard_dark.html">
+        <span class="material-symbols-outlined text-lg">home</span>
+        <span class="font-label-sm">홈</span>
+      </a>
+      <a aria-current="page" class="flex flex-col items-center justify-center gap-1 min-w-[44px] text-primary font-bold transition-colors" data-path="quantum" href="quantum_journal_dark.html">
+        <span class="material-symbols-outlined text-lg">auto_awesome</span>
+        <span class="font-label-sm">양자저널</span>
+      </a>
+      <a class="flex flex-col items-center justify-center gap-1 min-w-[44px] text-on-surface-variant hover:text-primary transition-colors" data-path="meditation" href="heart_meditation_dark.html">
+        <span class="material-symbols-outlined text-lg">self_improvement</span>
+        <span class="font-label-sm">심장명상</span>
+      </a>
+      <a class="flex flex-col items-center justify-center gap-1 min-w-[44px] text-on-surface-variant hover:text-primary transition-colors" data-path="daily-check" href="daily_check_tracker_dark.html">
+        <span class="material-symbols-outlined text-lg">check_circle</span>
+        <span class="font-label-sm">일일체크</span>
+      </a>
+      <a class="flex flex-col items-center justify-center gap-1 min-w-[44px] text-on-surface-variant hover:text-primary transition-colors" data-path="reports" href="stats_report_dark.html">
+        <span class="material-symbols-outlined text-lg">insights</span>
+        <span class="font-label-sm">리포트</span>
+      </a>
+    </div>
+  </nav>
+
+  <script src="app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Load saved journal
+      const todayJournal = QuantumStore.getTodayJournal();
+      if (todayJournal.futureDesires) {
+        document.getElementById('future-1').value = todayJournal.futureDesires[0] || '';
+        document.getElementById('future-2').value = todayJournal.futureDesires[1] || '';
+        document.getElementById('future-3').value = todayJournal.futureDesires[2] || '';
+      }
+      if (todayJournal.presentBlessings) {
+        document.getElementById('present-1').value = todayJournal.presentBlessings[0] || '';
+        document.getElementById('present-2').value = todayJournal.presentBlessings[1] || '';
+        document.getElementById('present-3').value = todayJournal.presentBlessings[2] || '';
+      }
+      if (todayJournal.reframingObstacle) {
+        document.getElementById('reframing-obstacle').value = todayJournal.reframingObstacle;
+      }
+      if (todayJournal.reframingCosmic) {
+        document.getElementById('reframing-result-text').textContent = todayJournal.reframingCosmic;
+        document.getElementById('reframing-result-box').classList.remove('hidden');
+      }
+
+      // Save journal inputs on change
+      const saveJournalState = () => {
+        QuantumStore.saveTodayJournal({
+          futureDesires: [
+            document.getElementById('future-1').value,
+            document.getElementById('future-2').value,
+            document.getElementById('future-3').value
+          ],
+          presentBlessings: [
+            document.getElementById('present-1').value,
+            document.getElementById('present-2').value,
+            document.getElementById('present-3').value
+          ],
+          reframingObstacle: document.getElementById('reframing-obstacle').value,
+          reframingCosmic: document.getElementById('reframing-result-text').textContent
+        });
+      };
+
+      document.querySelectorAll('textarea, input[type="text"]').forEach(el => {
+        el.addEventListener('input', saveJournalState);
+      });
+
+      // AI Reframing Button
+      document.getElementById('btn-ai-reframe').addEventListener('click', () => {
+        const obstacleText = document.getElementById('reframing-obstacle').value;
+        const cosmicAffirmation = generateCosmicReframing(obstacleText);
+        
+        document.getElementById('reframing-result-text').textContent = cosmicAffirmation;
+        document.getElementById('reframing-result-box').classList.remove('hidden');
+        saveJournalState();
+        playSingingBowlSound(528, 2);
+        showToast('✨ 우주적 궤도 수정 감사문이 생성되었습니다.', 'auto_awesome');
+      });
+
+      // Preset buttons fill
+      document.querySelectorAll('.preset-btn').forEach((btn, idx) => {
+        btn.addEventListener('click', () => {
+          const presets = [
+            '꿈꾸던 사업 아이디어가 우주의 조력 속에서 월 수익 1천만 원을 돌파하며 자립했음에 벅차게 감사합니다.',
+            '내면의 완전한 평온함과 비전이 명확해져 매일 아침 감동으로 눈뜨게 됨에 깊이 감사합니다.',
+            '사랑하는 사람들과 깊은 영적 교감을 나누며 풍요로운 기쁨을 만끽함에 감사합니다.'
+          ];
+          const targetInput = document.getElementById(`future-${(idx % 3) + 1}`);
+          if (targetInput) {
+            targetInput.value = presets[idx];
+            saveJournalState();
+            playSingingBowlSound(432, 1);
+            showToast('선제 감사 템플릿이 입력되었습니다.', 'edit');
+          }
+        });
+      });
+
+      // Confirm Declarations
+      document.getElementById('btn-confirm-declarations').addEventListener('click', () => {
+        QuantumStore.saveTodayJournal({ declarationsConfirmed: true });
+        playSingingBowlSound(432, 2.5);
+        showToast('3대 선언문 확약이 완료되었습니다! 📜', 'verified');
+      });
+
+      // Navigation button -> Meditation
+      document.getElementById('btn-go-meditation').addEventListener('click', () => {
+        window.location.href = 'heart_meditation_dark.html';
+      });
+
+      // Modal & Canvas Logic
+      const modal = document.getElementById('signature-modal');
+      const canvas = document.getElementById('signature-canvas');
+      const ctx = canvas.getContext('2d');
+      let isDrawing = false;
+
+      function resizeCanvas() {
+        canvas.width = canvas.parentElement.clientWidth;
+        canvas.height = canvas.parentElement.clientHeight;
+        ctx.strokeStyle = '#8ab4f8';
+        ctx.lineWidth = 2.5;
+        ctx.lineCap = 'round';
+      }
+
+      document.getElementById('btn-open-signature-modal').addEventListener('click', () => {
+        modal.classList.remove('hidden');
+        setTimeout(resizeCanvas, 100);
+      });
+
+      document.getElementById('btn-close-modal').addEventListener('click', () => {
+        modal.classList.add('hidden');
+      });
+
+      document.getElementById('btn-clear-canvas').addEventListener('click', () => {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+      });
+
+      // Canvas Drawing events
+      function getPos(e) {
+        const rect = canvas.getBoundingClientRect();
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+        return { x: clientX - rect.left, y: clientY - rect.top };
+      }
+
+      function startDraw(e) {
+        isDrawing = true;
+        const pos = getPos(e);
+        ctx.beginPath();
+        ctx.moveTo(pos.x, pos.y);
+      }
+
+      function draw(e) {
+        if (!isDrawing) return;
+        const pos = getPos(e);
+        ctx.lineTo(pos.x, pos.y);
+        ctx.stroke();
+      }
+
+      function stopDraw() { isDrawing = false; }
+
+      canvas.addEventListener('mousedown', startDraw);
+      canvas.addEventListener('mousemove', draw);
+      canvas.addEventListener('mouseup', stopDraw);
+      canvas.addEventListener('mouseleave', stopDraw);
+
+      canvas.addEventListener('touchstart', startDraw, { passive: true });
+      canvas.addEventListener('touchmove', draw, { passive: true });
+      canvas.addEventListener('touchend', stopDraw, { passive: true });
+
+      // Issue Receipt Button
+      document.getElementById('btn-issue-receipt').addEventListener('click', () => {
+        const sigDataUrl = canvas.toDataURL();
+        const future1 = document.getElementById('future-1').value || '미래 선제 감사 작성 완료';
+
+        const newReceipt = {
+          id: 'REC-' + Date.now().toString().slice(-6),
+          date: getFormattedDate(),
+          timestamp: new Date().toLocaleString('ko-KR'),
+          futureSummary: future1.slice(0, 45) + '...',
+          frequencyCode: '432Hz - THETA RESONANCE',
+          signatureName: '자필 주파수 확약',
+          status: '양자장 동조 보증완료'
+        };
+
+        QuantumStore.addReceipt(newReceipt);
+        QuantumStore.saveTodayJournal({ signatureDataUrl: sigDataUrl });
+
+        modal.classList.add('hidden');
+        playSingingBowlSound(528, 3.5);
+        showToast('📜 양자장 동조 보증서(영수증)가 발급되었습니다!', 'verified');
+
+        setTimeout(() => {
+          window.location.href = 'stats_report_dark.html';
+        }, 1200);
+      });
+    });
+  </script>
+</body>
+</html>
